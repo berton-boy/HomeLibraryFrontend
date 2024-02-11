@@ -1,0 +1,12 @@
+<div id="container" [formGroup] = "loginForm">
+    <h1>Logowanie</h1>
+
+    <input [(ngModel)]="username" type="text" formControlName="username" placeholder="Nazwa użytkownika">
+    <input [(ngModel)]="password" type="password" formControlName="password" placeholder="Hasło">
+
+    <button (click)="login()" [disabled]="!loginForm.valid">Zaloguj się</button>
+    <div style="margin-top: 20px;">
+        Nie posiadasz konta? <a [routerLink]="['/registration']"><b>Zarejestruj się</b></a> 
+    </div>
+    
+</div>

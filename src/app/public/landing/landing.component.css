@@ -1,0 +1,26 @@
+#containter {
+    background-color: green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    flex-direction: column;
+    gap: 50px;
+
+
+}
+
+button {
+    background-color: #000;
+    color: #fff;
+    border: 0px;
+    font-size: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+h1 {
+    margin: 0px;
+    font-weight: bold;
+    color: #fff;
+}

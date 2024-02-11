@@ -1,0 +1,33 @@
+
+<mat-dialog-content [formGroup]="eventForm" class="mat-dialog-content">
+  <h2>Dodaj Zdarzenie</h2>
+  <mat-form-field>
+    <mat-label>Data zdarzenia</mat-label>
+    <input matInput formControlName="eventDate" [matDatepicker]="datepicker">
+    <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+    <mat-datepicker #datepicker></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label >Rodzaj Zdarzenia</mat-label>
+    <mat-select formControlName="eventType" (selectionChange)="onEventTypeChange($event.value)">
+      <mat-option value="P">Książka została pożyczona</mat-option>
+      <mat-option value="Z">Książka została zwrócona</mat-option>
+      <mat-option value="ZK">Książka została zgubiona</mat-option>
+      <mat-option value="OK">Książka została odnaleziona</mat-option>
+      <mat-option value="UK">Książka została uszkodzona</mat-option>
+      <mat-option value="ZNK">Książka została zniszczona</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br>
+
+  <mat-form-field>
+    <mat-label>{{textLabel}}</mat-label>
+    <textarea matInput formControlName="description"></textarea>
+  </mat-form-field>
+  <br>
+
+  <button mat-raised-button color="primary" type="submit" (click)="onSubmit()">Dodaj</button>
+
+</mat-dialog-content>
+
+

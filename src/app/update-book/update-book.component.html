@@ -1,0 +1,67 @@
+ 
+<div id="container">
+        <h1><b>Edytuj książkę:</b> </h1>
+        <form [formGroup]="updateForm" (ngSubmit) = "onSubmit()" class="myForm">
+        
+                <label>Tytuł</label>
+            <input type="text" class="form-control" id="title" formControlName="title"
+                [(ngModel)] = "book.title" name = "title">
+                <div *ngIf="!updateForm.controls['title'].valid && updateForm.controls['title']?.touched">
+                    <div class="text-danger margin-bottom-thin my-mat-hint">
+                        <span>Pole nie może być puste.</span>
+                    </div>
+              </div>
+            
+        
+                <label>Autor</label>
+            <input type="text" class="form-control" id="authors" formControlName="authors"
+            [(ngModel)] = "authorInput" name = "authors">
+                <div *ngIf="!updateForm.controls['authors'].valid && updateForm.controls['authors']?.touched">
+                    <div class="text-danger margin-bottom-thin my-mat-hint">
+                        <span>Pole nie może być puste.</span>
+                    </div>
+              </div>
+        
+                <label>Rok wydania:</label>
+            <input type="text" class="form-control" id="releaseYear" formControlName="releaseYear"
+            [(ngModel)] = "book.releaseYear" name = "releaseYear" ng-minlength="1" ng-maxlength="4" onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false" (keypress)="($event.charCode >= 48 && $event.charCode < 58) "/>
+            <div *ngIf="!updateForm.controls['releaseYear'].valid && updateForm.controls['releaseYear']?.touched">
+                <div class="text-danger margin-bottom-thin my-mat-hint">
+                    <span>Należy podać rok wydania.</span>
+                </div>
+          </div>
+        
+        
+                    <label>Wydawca:</label>
+            <input type="text" class="form-control" id="publishers" formControlName="publishers"
+            [(ngModel)] = "publisherInput" name = "publishers">
+                <div *ngIf="!updateForm.controls['publishers'].valid && updateForm.controls['publishers']?.touched">
+                    <div class="text-danger margin-bottom-thin my-mat-hint">
+                        <span>Pole nie może być puste.</span>
+                    </div>
+              </div>
+        
+                <label>ISBN:</label>
+            
+            <input type="text" class="form-control" id="isbn" formControlName="isbn"
+            [(ngModel)] = "book.isbn" name = "isbn" ng-minlength="10" ng-maxlength="13" onCopy="return false" onDrag="return false" 
+            onDrop="return false" onPaste="" (keypress)="($event.charCode >= 48 && $event.charCode < 58) "/> 
+            <div *ngIf="!updateForm.controls['isbn'].valid && updateForm.controls['isbn']?.touched">
+                <div class="text-danger margin-bottom-thin my-mat-hint">
+                    <span>ISBN powinienen mieć 10 lub 13 cyfr.</span>
+                </div>
+          </div>
+            
+    
+        <br> 
+        
+        <div class="down" style="text-align: center;">
+            <button class="btn btn-success" type="submit" [disabled]="!updateForm.valid" style="align-items: center; margin-right: 20px;">Zapisz zmiany</button>
+            <button class="btn btn-danger" (click)="onCancelClick()" style="align-items: center;">Anuluj</button>
+            </div>
+        
+        </form>
+</div>
+
+
+    

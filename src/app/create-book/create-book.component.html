@@ -1,0 +1,66 @@
+<div id="container">
+    <h1>Dodaj książkę: </h1>
+    <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()" class="myForm">
+        
+           
+
+            <label>Tytuł</label>
+            <input type="text" class="form-control" id="title" formControlName="title" [(ngModel)]="book.title"
+                name="title">
+            <div *ngIf="!reactiveForm.controls['title'].valid && reactiveForm.controls['title']?.touched">
+                <div class="text-danger margin-bottom-thin my-mat-hint">
+                    <span>Pole nie może być puste.</span>
+                </div>
+            </div>
+
+
+            <label>Autor</label>
+            <input type="text" class="form-control" id="author" formControlName="author" [(ngModel)]="authorInput"
+                name="author">
+            <div *ngIf="!reactiveForm.controls['author'].valid && reactiveForm.controls['author']?.touched">
+                <div class="text-danger margin-bottom-thin my-mat-hint">
+                    <span>Pole nie może być puste.</span>
+                </div>
+            </div>
+
+            <label>Rok wydania:</label>
+            <input type="text" class="form-control" id="releaseYear" formControlName="releaseYear"
+                [(ngModel)]="book.releaseYear" name="releaseYear" ng-minlength="1" ng-maxlength="4"
+                onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false"
+                (keypress)="($event.charCode >= 48 && $event.charCode < 58) " />
+            <div *ngIf="!reactiveForm.controls['releaseYear'].valid && reactiveForm.controls['releaseYear']?.touched">
+                <div class="text-danger margin-bottom-thin my-mat-hint">
+                    <span>Należy podać rok wydania.</span>
+                </div>
+            </div>
+
+
+            <label>Wydawca:</label>
+            <input type="text" class="form-control" id="publisher" formControlName="publisher"
+                [(ngModel)]="publisherInput" name="publisher">
+            <div *ngIf="!reactiveForm.controls['publisher'].valid && reactiveForm.controls['publisher']?.touched">
+                <div class="text-danger margin-bottom-thin my-mat-hint">
+                    <span>Pole nie może być puste.</span>
+                </div>
+            </div>
+
+            <label>ISBN:</label>
+
+            <input type="text" class="form-control" id="isbn" formControlName="isbn" [(ngModel)]="book.isbn" name="isbn"
+                ng-minlength="10" ng-maxlength="13" onCopy="return false" onDrag="return false" onDrop="return false"
+                onPaste="" (keypress)="($event.charCode >= 48 && $event.charCode < 58) " #box
+                (keyup)="getValue(box.value)" />
+            <div *ngIf="!reactiveForm.controls['isbn'].valid && reactiveForm.controls['isbn']?.touched">
+                <div class="text-danger margin-bottom-thin my-mat-hint">
+                    <span>ISBN powinienen mieć 10 lub 13 cyfr.</span>
+                </div>
+            </div>
+            <div style="text-align: right;">
+                <br>
+                <button id="findBookByISBNButton" (click)="findBookByISBN()" class="btn btn-success" type="button"
+                    [disabled]="!reactiveForm.get('isbn').valid">Wyszukaj po ISBN</button>
+            </div>
+
+            <button type="submit" class="btn btn-success" [disabled]="!reactiveForm.valid">Zapisz</button>
+    </form>
+</div>

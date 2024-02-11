@@ -1,0 +1,59 @@
+<h1 style="text-align: center; margin-top: 20px; font-size: xx-large;"><b>Twoje książki:</b>  </h1>
+<br>
+<div class="container">
+    <input class="form-control" type="text" placeholder="Wpisz tytuł szukanej książki..." aria-label="Search" [(ngModel)]="searchText">
+<table class="table table-striped">
+    <thead> 
+        <tr>
+            <th>ID</th>
+            <th>Okładka</th>
+            <th>Tytuł</th>
+            <th>Autorstwo</th>
+            <th>Rok wydania</th>
+            <th>Wydawnictwo</th>
+            <th>ISBN</th>
+            <th>Akcje</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor = "let book of books | search: searchText">
+            <td>{{books.indexOf(book)+1}}</td>
+            <td>  <ng-container *ngIf="book.smallCoverUrl.includes('localhost'); else otherImage">
+                <img [src]="book.smallCoverUrl | securePipe  | async" />
+              </ng-container>
+              <ng-template #otherImage>
+                <img [src]="book.smallCoverUrl" />
+              </ng-template>
+            </td>
+            <td> {{book.title}}</td>
+            <td>
+                <ng-container *ngFor="let author of book.authors; let last = last">
+                  {{ author.fullName }}{{ !last ? ', ' : '' }}
+                </ng-container>
+              </td>
+            <td> {{book.releaseYear}}</td>
+            <td>
+                <ng-container *ngFor="let publisher of book.publishers; let last = last">
+                  {{ publisher.name }}{{ !last ? ', ' : '' }}
+                </ng-container>
+              </td>
+            <td> {{book.isbn}}</td>
+            <td style="display: inline-flexbox; width: 150px;">
+                <button mat-mini-fab color="primary"  (click) = "updateBook(book.id)" class="buttonMargin"> 
+                    <mat-icon>mode_edit</mat-icon>
+                </button>
+                <button mat-mini-fab color="warn"  (click) = "confirmAndDeleteBook(book.id)" class="buttonMargin"> 
+                    <mat-icon>delete</mat-icon>
+                </button>
+                <button mat-mini-fab color="white"  (click) = "bookDetails(book.id)"> 
+                    <mat-icon>more-horiz</mat-icon>
+                </button>
+                
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br>
+<br>
+</div>

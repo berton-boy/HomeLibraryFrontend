@@ -1,0 +1,19 @@
+<div class="table-container">
+    <table>
+        <thead>
+          <tr>
+            <th>Lp</th>
+            <th>Zdarzenie</th>
+            <th>Data</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of bookEvents | orderByEventDate">
+            <td>{{bookEvents.indexOf(row)+1}}</td>
+            <td>{{ row.description }}</td>
+            <td>{{ formatDate(row.eventDate) }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <button class="btn btn-success" style="margin-top: 15px;" (click)="openAddEventDialog()">Dodaj zdarzenie</button>
+</div>

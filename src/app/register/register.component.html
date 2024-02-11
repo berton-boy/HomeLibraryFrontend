@@ -1,0 +1,12 @@
+<div id="container" [formGroup] = "registerForm" (ngSubmit) = "onSubmit()">
+    <h1>Rejestracja</h1>
+
+    <input [(ngModel)]="user.username" type="text" formControlName="username" placeholder="Nazwa użytkownika">
+    <input [(ngModel)]="user.email" type="email" formControlName="email" placeholder="Adres e-mail">
+    <input [(ngModel)]="user.password" type="password" formControlName="password" placeholder="Hasło">
+    <input  formControlName="repeatPassword" type="password" placeholder="Powtórz hasło">
+
+    <button (click)="register()" [disabled]="!registerForm.valid">Zarejestruj się</button>
+    
+    
+</div>

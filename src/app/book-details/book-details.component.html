@@ -1,0 +1,74 @@
+<div id="container">
+        <div id="image-container">
+          <ng-container *ngIf="book && book.bigCoverUrl && book.bigCoverUrl.includes('localhost'); else otherImage">
+            <img [src]="book.bigCoverUrl | securePipe  | async" />
+          </ng-container>
+          <ng-template #otherImage>
+            <img [src]="book.bigCoverUrl" />
+          </ng-template>
+          <p style="margin-top: 20px;">Okładka się nie wyświetla? A może to nieodpowiednia wersja?</p> 
+           <p><b>Dodaj ją ręcznie!</b></p> 
+            <button class="btn btn-success" (click)="toggleUploadComponent()">Dodaj okładkę</button>
+
+          <div *ngIf="showUploadComponent">
+            <div class="center">
+              <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)" 
+              (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+                  <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+                    Przeciągnij plik JPG w wymiarach 320px x 500px.
+                    <button type="button" (click)="openFileSelector()">Browse Files</button>
+                  </ng-template>
+              </ngx-file-drop>
+              <div class="upload-table">
+                  <table class="table">
+                      <thead>
+                          <tr>
+                              <th>Name</th>
+                          </tr>
+                      </thead>
+                      <tbody class="upload-name-style">
+                          <tr *ngFor="let item of files; let i=index">
+                              <td><strong>{{ item.relativePath }}</strong></td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+          </div>
+        </div>
+        
+        <div class="text">
+            <h1><b>Szczegóły książki:</b></h1>
+            <label class="details-label"> <b>Tytuł:  </b></label>{{book.title}}
+            
+            <label class="details-label"> <b>Autor:  </b></label>
+            <span *ngIf="book && book.authors">
+                <ng-container *ngFor="let author of book.authors; let last = last">
+                  {{ author.fullName }}{{ !last ? ', ' : '' }}
+                </ng-container>
+              </span>
+            
+            <label class="details-label"> <b>Rok wydania:  </b></label>{{book.releaseYear}}
+            
+            <label class="details-label"> <b>Wydawnictwo:  </b></label>
+            <span *ngIf="book && book.publishers">
+                <ng-container *ngFor="let publisher of book.publishers; let last = last">
+                  {{ publisher.name }}{{ !last ? ', ' : '' }}
+                </ng-container>
+              </span> 
+            
+            <label class="details-label"> <b>ISBN:  </b></label>{{book.isbn}}
+        </div>
+        <div>
+          <app-book-event-table [bookEvents]="book.eventList" [bookId]="book.id"></app-book-event-table>
+        </div>
+      
+    
+</div>
+
+
+
+
+
+
+
