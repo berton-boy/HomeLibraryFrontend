@@ -1,3 +1,11 @@
+Hello,
+
+My name is Bartek. This repository contains code of my study, non-commercial project - Angular frontend, temporarily called "HomeLibrary". If you want to see the backend part, go ahead and check this repo: https://github.com/berton-boy/HomeLibraryBackend.
+
+Best regards!
+
+
+
 # HomeLibraryFrontend
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.2.
